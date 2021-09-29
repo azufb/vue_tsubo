@@ -3,27 +3,36 @@
   <head>
     <meta charset="utf-8">
     <title>サンプル</title>
+    <link rel="stylesheet" href="main.css">
   </head>
   <body>
     <div id="app">
-      <ul>
-        <li v-for="item in list">{{item.name}} {{item.price}}円</li>
-      </ul>
+      {{ message }}
     </div>
     <script src="https://jp.vuejs.org/js/vue.js"></script>
+    <script src="main.js"></script>
     <script>
-      let app = new Vue({
-        el: '#app',
-        data: {
-          list: [
-            {name: '商品A', price: 1000},
-            {name: '商品B', price: 2000},
-            {name: '商品C', price: 980}
-          ]
+      var Movable = function(x, y) {
+        this.pos = {
+          x: x,
+          y: y
+        };
+        this.move = function(x, y) {
+          this.pos.x += x;
+          this.pos.y += y;
         }
-      });
-      app.price = 1000;
-      app.stock = 10;
+      }
+      var ball = [];
+      for (var i = 0; i <= 100; i++) {
+        // Movableクラスのインスタンス生成。
+        ball[i] = new Movable(
+          Math.floor(Math.random() * window.innerWidth),
+          Math.floor(Math.random() * window.innerHeight)
+        );
+      }
+      for (var i = 0; i <= 100; i++) {
+        document.write('<div class="ball" style="top: ' + ball[i].pos.y + 'px; left: ' + ball[i].pos.x + 'px;">●</div>');
+      }
     </script>
   </body>
 </html>
